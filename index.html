@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Food Order</title>
+  <link rel="stylesheet" href="./style1.css">
+</head>
+<body>
+
+<header>
+  <h1> FOOD ORDER WEBSITE</h1>
+  <p>Đặt món ăn online</p>
+</header>
+
+<div class="container">
+
+  <!-- MENU -->
+  <div class="menu">
+
+    <div class="card">
+      <img src="">
+      <div class="card-body">
+        <h3>Nước</h3>
+        <div class="price">30.000 VNĐ</div>
+        <button onclick="addToCart('Nước',30000)">
+          Thêm vào giỏ
+        </button>
+      </div>
+    </div>
+
+
+  </div>
+
+  <!-- GIỎ HÀNG -->
+  <div class="cart">
+    <h2>🛒 Giỏ hàng</h2>
+
+    <div id="cart-items"></div>
+
+    <div class="total">
+      Tổng tiền: <span id="total">0</span> VNĐ
+    </div>
+
+    <button onclick="goToPayment()">
+      Thanh Toán
+    </button>
+  </div>
+
+  <!-- THANH TOÁN -->
+  <div class="payment-page" id="paymentPage">
+
+    <h2>📱 Quét mã QR để thanh toán</h2>
+
+    <p>
+      Ngân hàng: Vp Bank
+    </p>
+
+    <p>
+      STK: 
+    </p>
+
+    <p>
+      Chủ TK: Ngô Đoàn Anh Tuấn
+    </p>
+
+    <!-- QR -->
+    <img src="https://img.vietqr.io/image/MB-123456789-compact2.png?amount=0&addInfo=ThanhToanFood" alt="QR CODE">
+
+    <div class="success">
+      ✔ Sau khi chuyển khoản vui lòng chờ xác nhận
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+
+  let total = 0;
+
+  function addToCart(name, price){
+
+    const cartItems = document.getElementById("cart-items");
+
+    const item = document.createElement("div");
+
+    item.classList.add("cart-item");
+
+    item.innerHTML = `
+      <span>${name}</span>
+      <span>${price.toLocaleString()} VNĐ</span>
+    `;
+
+    cartItems.appendChild(item);
+
+    total += price;
+
+    document.getElementById("total").innerText =
+      total.toLocaleString();
+  }
+
+  function goToPayment(){
+
+    if(total === 0){
+      alert("Vui lòng chọn món ăn!");
+      return;
+    }
+
+    document.getElementById("paymentPage").style.display = "block";
+
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: "smooth"
+    });
+  }
+
+</script>
+
+</body>
+</html>
